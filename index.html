@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang='en-GB'>
+    <head>
+        <meta charset='utf-8'>
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Progress Bars Demo</title>
+        <link rel="stylesheet" href="css/index.css" />
+    </head>
+
+    <body>
+        <h1>Progress Bars Demo</h1>
+
+        <div id='container'>
+        </div>
+
+        <script id='template' type='text/ractive'>
+            <div id='progressbar-container'>
+                {{#each bars:i}}
+                    <div class='progressbar-body {{ selectedIndex === i ? "highlight":"" }}'>
+                        <span class='progressbar-value {{ value < 100 ? "halfRound" : ( value > 100 ? "allRound warning": "allRound" ) }}' 
+							style='width:{{ value < 100 ? value : 100 }}%;'><span></span></span>
+                        <span class='progressbar-label'>{{Math.round(value)}}%</span>
+                    </div>
+                {{/each}}
+            </div>
+            <div class='control-panel'>
+                <select id="bar-selector" value='{{selectedIndex}}'>
+                    {{#each bars:i}}
+                        <option value='{{i}}'>{{name}}</option>
+                    {{/each}}
+                </select>
+				<div class='button-panel'>
+	                <button on-tap='decrement:25' on-press='continueDecrement:25'>-25</button>
+	                <button on-tap='decrement:10' on-press='continueDecrement:10'>-10</button>
+	                <button on-tap='increment:10' on-press='continueIncrement:10'>+10</button>
+	                <button on-tap='increment:25' on-press='continueIncrement:25'>+25</button>
+				</div>
+            </div>
+        </script>
+
+	    <button id='test-button' onclick='runTest()' class='test-button'>Run test</button>
+        <script src='js/lib/jquery-3.0.0.min.js'></script>
+        <script src='js/lib/ractive.js'></script>
+        <script src='js/app.js'></script>
+		
+		<link rel='stylesheet' href='node_modules/mocha/mocha.css'>
+			
+		<div id='mocha'></div>
+
+		<script src='node_modules/simulant/dist/simulant.umd.js'></script>
+		<script src='node_modules/ractive/ractive-legacy.js'></script>
+		<script src='node_modules/mocha/mocha.js'></script>
+		<script src='node_modules/chai/chai.js'></script>
+		
+
+		<script>
+			mocha.setup({
+				ui: 'bdd',
+				timeout: 5000,
+				ignoreLeaks: true
+			});
+		</script>
+		
+		<script src='test/tests.js'></script>
+
+		<script>
+			var runTest = function () {
+				document.getElementById( 'test-button' ).style.display = 'none';
+				mocha.run();
+			};
+		</script>
+	</body>
+</html>
