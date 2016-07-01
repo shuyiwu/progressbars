@@ -1,0 +1,189 @@
+$font-stack:    Helvetica, sans-serif;
+$bar-color: #2BC253;
+$warning-color: #FF0000;
+
+@mixin border-radius( $radius ) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin border-half-radius( $radius1, $radius2 ) {
+  -webkit-border-radius: $radius1 $radius2 $radius2 $radius1;
+     -moz-border-radius: $radius1 $radius2 $radius2 $radius1;
+      -ms-border-radius: $radius1 $radius2 $radius2 $radius1;
+          border-radius: $radius1 $radius2 $radius2 $radius1;
+}
+
+@mixin box-shadow( $h, $v, $blur, $spread, $color ) {
+    -webkit-box-shadow: $h $v $blur $spread $color;
+       -moz-box-shadow: $h $v $blur $spread $color;
+            box-shadow: $h $v $blur $spread $color;
+
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 50px 50px;
+    }
+}
+
+html, body, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 100% $font-stack;
+  background-color: #efefef;
+}
+
+.demo-page {
+	height: auto;
+	background-color: white;
+	margin: auto;
+	padding: 20px;
+	width: 80%;
+	min-width: 200px;
+	@media screen and (max-width: 320px) {
+	    width: 95%;
+	}
+	@media screen and (min-width: 860px) {
+	    width: 60%;
+	}
+	h1 {
+		height: 60px;
+		width: 100%;
+		text-align: center;
+	}
+	#container {
+		width: 80%;
+		text-align: center;
+		margin: auto;		
+		.control-panel {
+		    width: 90%;
+		    margin: auto;
+		    text-align: center
+		}
+		.button-panel {	
+		    display: inline-block;
+		    min-width: 220px;
+		}
+	}
+}
+
+.progressbar-body {
+    width: 90%;
+    height:30px;
+    position: relative;
+    background: #555;
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+    @include border-radius( 25px ); 
+    @include box-shadow( 0, 0, -1px, 1px, rgba(255,255,255,0.3)); 
+	
+	span.progressbar-value {
+	    height:100%;
+	    display: block;
+	    background-color: $bar-color;
+	    background-image: linear-gradient(
+	            center bottom,
+	            rgb(43,194,83) 37%,
+	            rgb(84,240,84) 69%
+	    );
+	    position: relative;
+	    overflow: hidden;		
+    	@include border-half-radius( 20px, 8px ); 
+   		@include box-shadow( inset, 0, 2px, 9px, rgba(255,255,255,0.3) );
+   		@include box-shadow( inset, 0, -2px, 6px, rgba(0,0,0,0.4) ); 
+		span {
+		    content: "";
+		    position: absolute;
+		    top: 0; left: 0; bottom: 0; right: 0;
+		    background-image: linear-gradient(
+		            -45deg,
+		            rgba(255, 255, 255, .2) 25%,
+		            transparent 25%,
+		            transparent 50%,
+		            rgba(255, 255, 255, .2) 50%,
+		            rgba(255, 255, 255, .2) 75%,
+		            transparent 75%,
+		            transparent
+		    );
+		    z-index: 1;
+		    background-size: 50px 50px;
+		    overflow: hidden;
+		    animation: move 2s linear infinite;
+    		@include border-half-radius( 20px, 8px ); 
+		}
+	}
+	.progressbar-label {
+	    position: relative;
+	    top: -24px;
+	    color: #FFFFFF;
+	    font-size: 16px;
+	    font-weight: bolder;
+	}
+}
+
+.progressbar-body > span.progressbar-value.allRound > span,
+span.progressbar-value.allRound{
+    @include border-radius( 20px ); 
+}
+.progressbar-body > span.progressbar-value.halfRound > span,
+span.progressbar-value.halfRound{
+    @include border-half-radius( 20px, 8px ); 
+}
+
+.progressbar-body.highlight {
+   	@include box-shadow( 0px, 0px, 10px, 1px, rgba(255, 50, 50, 0.75));
+}
+
+span.progressbar-value.warning {
+	background-color: $warning-color;
+}
+button {
+  	background-color: $bar-color;
+  	border: 1px solid #63a62f;
+  	border-bottom: 1px solid #5b992b;
+  	color: #fff;
+  	font-size: 16px;
+  	font-weight: bolder;
+  	padding: 7px 0 8px 0;
+  	text-align: center;
+  	text-shadow: 0 -1px 0 #4c9021;
+  	width: 50px; 
+  	height: 37px;
+  	margin-bottom: 10px;
+  	@include border-radius( 3px ); 
+  	@include box-shadow( insert, 1px, 0, 0, #96ca6d );
+	&:hover {	
+	    background-color: #76b347;
+	    cursor: pointer; 
+  		@include box-shadow( insert, 1px, 0, 0, #8dbf67 );
+	}
+	&:active{
+	    border: 1px solid #5b992b;
+	    border-bottom: 1px solid #538c27;
+  		@include box-shadow( 0, 0, 8px, 4px, #548c29 );
+  		@include box-shadow( 0, 1px, 0, 0, #eeeeee );
+	}
+}
+select {
+  	@extend button;
+	width:160px;
+}
+
+.test-button {
+  	@extend button;
+	width:150px;
+	margin: 20px;
+}
+#mocha > #mocha-stats {
+	position: relative;
+}
