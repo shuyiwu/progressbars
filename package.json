@@ -1,20 +1,34 @@
 {
   "name": "progressbarapp",
   "version": "1.0.0",
-  "description": "progress bar demo",
+  "description": "progress bars demo",
   "main": "index.js",
-  "dependencies": {
-    "hammerjs": "^2.0.8",
-    "ractive": "^0.7.3",
-    "ractive-events-tap": "^0.0",
-    "ractive-touch": "^0.4.0"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0"
-  },
-  "scripts": {
+  "directories": {
     "test": "test"
   },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+	"grunt-contrib-sass": "^1.0.0",
+    "simulant": "^0.2.2",
+    "ractive": "^0.7.3"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuyiwu/progressbars.git"
+  },
+  "keywords": [
+    "progressbar"
+  ],
   "author": "shuyi wu",
-  "license": "MIT"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shuyiwu/progressbars/issues"
+  },
+  "homepage": "https://github.com/shuyiwu/progressbars#readme"
 }
